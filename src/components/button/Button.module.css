@@ -1,0 +1,36 @@
+.number, .numberZero, .action, .delete, .equal {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.number:hover, .numberZero:hover, .action:hover, .delete:hover, .equal:hover {
+    border: 1px solid transparent;
+}
+
+.number, .numberZero {
+    background-color: gray;
+}
+
+.numberZero {
+    width: 160px;
+}
+
+.action {
+    background-color: orange;
+}
+
+.delete {
+    background-color: #b47500;
+    width: 160px;
+}
+
+.equal {
+    background-color: white;
+    color: black;
+}

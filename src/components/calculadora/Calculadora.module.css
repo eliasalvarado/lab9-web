@@ -1,0 +1,47 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 328px;
+    max-width: 328px;
+}
+
+.buttonsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    width: 318px;
+    border: 1px solid black;
+    background-color: #464646;
+}
+
+.history, .typed {
+    width: 318px;
+    height: 50%;
+    align-items: center;
+}
+
+.typed {
+    font-size: 50px;
+    text-align: end;
+}
+
+.history {
+    color: #9a9a9a;
+    font-size: 40px;
+    text-align: end;
+}
+
+span {
+    width: 100%;
+}
+
+

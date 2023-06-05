@@ -17,5 +17,8 @@ module.exports = {
     'react',
   ],
   rules: {
+    semi: ['error', 'never'],
+    'react/function-component-definition': 'off',
+    'linebreak-style': 'off',
   },
-};
+}
