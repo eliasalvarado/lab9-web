@@ -30,27 +30,28 @@ function Calculadora() {
 
   const [typed, setTyped] = useState('')
   const [history, setHistory] = useState('')
+  const [n1, setN1] = useState('')
+  const [op, setOp] = useState('')
   const operacion = ['+', '-', 'x', '÷', '%']
 
-  const operate = (operation) => {
-    const op = operation.split(' ')
+  const operate = () => {
     let resultado = ''
-    switch (op[1]) {
+    switch (op) {
       case '+':
-        resultado = +op[0] + +op[2]
+        resultado = +n1 + +typed
         break
       case '-':
-        resultado = +op[0] - +op[2]
+        resultado = +n1 - +typed
         break
       case 'x':
-        resultado = +op[0] * +op[2]
+        resultado = +n1 * +typed
         break
       case '÷':
-        if (+op[2] !== 0) resultado = +op[0] / +op[2]
+        if (+typed !== 0) resultado = +n1 / +typed
         else resultado = -1
         break
       case '%':
-        if (+op[2] !== 0) resultado = +op[0] % +op[2]
+        if (+typed !== 0) resultado = +n1 % +typed
         else resultado = -1
         break
       default:
@@ -58,29 +59,44 @@ function Calculadora() {
     }
     if (resultado.toString().includes('.')) resultado = parseFloat(resultado).toFixed(2)
     if (resultado >= 0 && resultado.toString().length <= 9) {
-      setHistory(`${typed} =`)
-      setTyped(resultado)
+      setHistory(resultado)
+      setTyped('')
+      setN1(resultado)
     } else {
       setHistory('')
+      setN1('')
       setTyped('ERROR')
     }
   }
 
-  const handleClick = (simbol) => {
-    if (simbol === 'C') {
-      setTyped('')
+  const handleClick = (symbol) => {
+    if (symbol === 'C') {
       setHistory('')
+      setTyped('')
+      setN1('')
+      setOp('')
+    } else if (symbol === '=') {
+      if (n1 !== '' && op !== '') {
+        operate()
+        setN1('')
+        setOp('')
+      } else setTyped('')
     } else if (typed === 'ERROR') {
-      setTyped(simbol)
-    } else if (simbol === '=') {
-      operate(typed)
-    } else if (+typed >= 0 && history !== '' && operacion.indexOf(simbol) === -1) {
-      setTyped(simbol)
-    } else if (typed.length === 9) {
-      setTyped(typed)
-    } else if (operacion.indexOf(simbol) !== -1) {
-      setTyped(`${typed} ${simbol} `)
-    } else setTyped(typed + simbol)
+      setTyped(symbol)
+    } else if (operacion.indexOf(symbol) === -1) {
+      if (typed.length < 9) {
+        setTyped(`${typed}${symbol}`)
+      }
+    } else if (operacion.indexOf(symbol) !== -1 && op === '') {
+      setHistory(`${typed} ${symbol}`)
+      setOp(symbol)
+      setTyped('')
+      setN1(typed)
+    } else if (operacion.indexOf(symbol) !== -1 && op !== '') {
+      setHistory(`${typed} ${symbol}`)
+      operate()
+      setOp(symbol)
+    }
   }
 
   return (
